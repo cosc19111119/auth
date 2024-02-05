@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import Login from './pages/Login';
+import SingnUp from './pages/SingnUp';
+import { Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/Dashboard'
+import Nanbar from './pages/Nanbar';
+import Home from './pages/Home';
+import Logout from './pages/Logout';
+import CheckLogin from './pages/CheckLogin';
+import { useState } from 'react';
+import { MyContext } from './MyContext';
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div>
+<MyContext.Provider value={{isLogin,setIsLogin}}>
+    <Nanbar/>
+<Routes>
+<Route path='/' element={<Home/>}/>
+<Route path="/login" element={<Login />} />
+<Route path="/signup" element={<SingnUp />} />
+<Route path='/dashboard' element={<CheckLogin ><Dashboard/></CheckLogin>}>
+</Route>
+<Route path='/logout' element={<Logout/>}/>
+
+</Routes>
+</MyContext.Provider>
+
+   </div>
   );
 }
 
